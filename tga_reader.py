@@ -553,14 +553,21 @@ def tga_limit_compression_test():
 	# create the data manually
 	height = 2
 	data = []
-	for i in xrange(0,len(height)):
+	for i in xrange(0,height):
 		row = []
 		for j in xrange(0,127):
 			row.append( (0,0,0,255) )
 		# change the color of the last one
-		row.append( (100,500,200,255) )
+		row.append( (100,50,200,255) )
 		data.append(row)
 	# now create the tga
+	tga = TGA(10,2,128,32,0x08,data)
+	save_tga(tga,'out4.tga')
+	tga_copy = read_tga('out4.tga')
+	assert tga[0] == tga_copy[0] and tga[1] == tga_copy[1] and tga[2] == tga_copy[2] and tga[3] == tga_copy[3] and tga[4] == tga_copy[4]
+	print 'Image data:'
+	print tga_copy.data
+	
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
