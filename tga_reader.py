@@ -101,9 +101,9 @@ def get_tga_color(tga,x,y):
 	
 
 def create_mask(bits):
-	mask = 0
-	for _ in xrange(0,bits):
-		mask = (mask << 1) | 0x01
+	assert bits >= 0, 'Cannot create a bitmask with negative size'
+	assert bits < 32, 'Cannot create a bitmask bigger than 32 bits'
+	mask = ( 1 << bits ) - 1
 	return mask 
 
 def traspose_matrix(matrix):
